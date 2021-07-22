@@ -12,3 +12,6 @@ services:
     tty: true
     stdin_open: true
     command: /bin/sh
+
+
+    hogehogehgoeghoegheogheog
