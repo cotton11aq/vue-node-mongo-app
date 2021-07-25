@@ -3,7 +3,6 @@ const Product = require('../models/product');
 
 router.post('/products', async (req, res) => {
   try {
-    console.log(req.body);
     let product = new Product();
     product.title = req.body.title;
     product.description = req.body.description;
@@ -39,10 +38,24 @@ router.get('/products', async (req, res) => {
   }
 });
 
+router.get('/products/:id', async (req, res) => {
+  try {
+    let product = await Product.findOne({ _id: req.params.id });
+
+    res.json({
+      status: true,
+      product: product,
+    });
+  } catch (err) {
+    res.status(500).json({
+      status: false,
+      message: err.message,
+    });
+  }
+});
+
 router.put('/products/:id', async (req, res) => {
   try {
-    console.log(req.params.id);
-    console.log(req.body.title);
     let product = await Product.findOneAndUpdate(
       { _id: req.params.id },
       {
