@@ -1,38 +1,33 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const morgan = require('morgan');
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
 const app = express();
 
-mongoose.connect(
-  process.env.DATABASE,
-  {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-  },
-  (err) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Connected to the database');
-    }
+mongoose.connect(process.env.DATABASE, (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('mongoose connected');
   }
+});
+
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
 );
 
-// Middlewares
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+const todoRoutes = require('./routes/todo');
 
-const productRoutes = require('./routes/product');
+app.use('/api', todoRoutes);
 
-app.use('/api', productRoutes);
+app.get('/', (req, res) => {
+  res.send('<h1>hoge</h1>');
+});
 
 app.listen(3000, (err) => {
   if (err) {
