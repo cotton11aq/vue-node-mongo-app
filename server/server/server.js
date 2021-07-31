@@ -21,7 +21,7 @@ app.use(
     extended: false,
   })
 );
-app.use(cors());
+app.use(cors);
 
 const todoRoutes = require('./routes/todo');
 
