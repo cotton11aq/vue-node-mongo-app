@@ -1,7 +1,11 @@
-import { Api } from './index';
+import Api from './index';
 
 export default {
-  getTodos() {
-    return Api().get('/api/todos');
+  getProducts() {
+    return Api().get('/api/products');
+  },
+
+  getProduct(id) {
+    return Api().get(`/api/products/${id}`);
   },
 };
