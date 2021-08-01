@@ -30,7 +30,6 @@ app.use('/api', todoRoutes);
 app.get('/', (req, res) => {
   res.send('<h1>hoge</h1>');
 });
-
 app.listen(3000, (err) => {
   if (err) {
     console.log(err);
