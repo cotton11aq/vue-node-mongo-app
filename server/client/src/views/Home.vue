@@ -1,11 +1,14 @@
 <template lang="pug">
 div
   h1 ホーム
+  p
+    router-link(to='/create') 新規登録画面
+    | へ飛ぶ
   ul(v-for='(todo, index) in todos')
     li(key=index) {{ todo.title }}
       input(type='checkbox', :checked='todo.done')
       router-link(to='/') 編集
-      button 削除
+      button(@click='deleteTodo(todo._id)') 削除
 </template>
 
 <script>
@@ -26,7 +29,13 @@ export default {
       try {
         const todos = await Methods.getTodos();
         this.todos = todos.data.todos;
-        console.log(this.todos);
+      } catch (err) {
+        console.log(err.message);
+      }
+    },
+    deleteTodo(id) {
+      try {
+        Methods.deleteTodo(id);
       } catch (err) {
         console.log(err.message);
       }
