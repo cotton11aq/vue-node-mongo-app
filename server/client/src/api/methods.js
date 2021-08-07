@@ -1,11 +1,13 @@
 import Api from './index';
 
 export default {
-  getProducts() {
-    return Api().get('/api/products');
+  getTodos() {
+    return Api().get('/api/todos');
   },
-
-  getProduct(id) {
-    return Api().get(`/api/products/${id}`);
+  postTodo(data) {
+    return Api().post(`/api/todos`, data);
+  },
+  deleteTodo(id) {
+    return Api().delete(`/api/todos/${id}`);
   },
 };
