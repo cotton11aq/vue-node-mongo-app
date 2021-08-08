@@ -21,7 +21,7 @@ app.use(
     extended: false,
   })
 );
-app.use(cors);
+app.use(cors());
 
 const todoRoutes = require('./routes/todo');
 
@@ -30,7 +30,6 @@ app.use('/api', todoRoutes);
 app.get('/', (req, res) => {
   res.send('<h1>hoge</h1>');
 });
-
 app.listen(3000, (err) => {
   if (err) {
     console.log(err);
